@@ -1,8 +1,8 @@
 package com.robp.databaseWithJPA.repositories;
 
 import com.robp.databaseWithJPA.TestDataUtil;
-import com.robp.databaseWithJPA.domain.Author;
-import com.robp.databaseWithJPA.domain.Book;
+import com.robp.databaseWithJPA.domain.entities.AuthorEntity;
+import com.robp.databaseWithJPA.domain.entities.BookEntity;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +14,14 @@ import java.util.Optional;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
-public class BookDaoImplIntegrationTest {
+public class BookEntityIntegrationTest {
 
     private BookRepository underTest;
 
     private AuthorRepository authorRepository;
 
     @Autowired
-    public BookDaoImplIntegrationTest(BookRepository underTest, AuthorRepository authorRepository){
+    public BookEntityIntegrationTest(BookRepository underTest, AuthorRepository authorRepository){
         this.underTest = underTest;
         this.authorRepository = authorRepository;
     }
@@ -29,11 +29,11 @@ public class BookDaoImplIntegrationTest {
     @Test
     public void testThatBookCanBeCreatedAndRecalled(){
 
-        Author author = TestDataUtil.createTestAuthorA();
+        AuthorEntity authorEntity = TestDataUtil.createTestAuthorA();
 
-        Book book = TestDataUtil.createTestBookA(author);
+        BookEntity book = TestDataUtil.createTestBookA(authorEntity);
         underTest.save(book);
-        Optional<Book> result = underTest.findById(book.getIsbn());
+        Optional<BookEntity> result = underTest.findById(book.getIsbn());
         assertThat(result).isPresent();
         assertThat(result.get()).isEqualTo(book);
 

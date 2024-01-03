@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @Log
-public class DatabaseWithJpaApplication {
+public class LibraryApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DatabaseWithJpaApplication.class, args);
+		SpringApplication.run(LibraryApplication.class, args);
 	}
 
 }

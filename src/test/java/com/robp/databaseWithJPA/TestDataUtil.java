@@ -1,43 +1,43 @@
 package com.robp.databaseWithJPA;
 
 
-import com.robp.databaseWithJPA.domain.Author;
-import com.robp.databaseWithJPA.domain.Book;
+import com.robp.databaseWithJPA.domain.entities.AuthorEntity;
+import com.robp.databaseWithJPA.domain.entities.BookEntity;
 
 public final class TestDataUtil {
     private TestDataUtil(){
 
     }
 
-    public static Author createTestAuthorA() {
-        return Author.builder()
+    public static AuthorEntity createTestAuthorA() {
+        return AuthorEntity.builder()
                 .id(1L)
                 .name("Mario Rossi")
                 .age(40)
                 .build();
     }
 
-    public static Author createTestAuthorB() {
-        return Author.builder()
+    public static AuthorEntity createTestAuthorB() {
+        return AuthorEntity.builder()
                 .id(2L)
                 .name("Francesco Bianchi")
                 .age(60)
                 .build();
     }
 
-    public static Book createTestBookA(final Author author) {
-        return Book.builder()
+    public static BookEntity createTestBookA(final AuthorEntity authorEntity) {
+        return BookEntity.builder()
                 .isbn("1235-56-6642-122")
                 .title("Il signore degli anelli")
-                .author(author)
+                .authorEntity(authorEntity)
                 .build();
     }
 
-    public static Book createTestBookB(final Author author) {
-        return Book.builder()
+    public static BookEntity createTestBookB(final AuthorEntity authorEntity) {
+        return BookEntity.builder()
                 .isbn("4631-56-6642-122")
                 .title("Il signore degli anelli - Le due torri")
-                .author(author)
+                .authorEntity(authorEntity)
                 .build();
     }
 }
