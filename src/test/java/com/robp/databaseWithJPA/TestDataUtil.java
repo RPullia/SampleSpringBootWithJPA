@@ -25,19 +25,19 @@ public final class TestDataUtil {
                 .build();
     }
 
-    public static Book createTestBookA() {
+    public static Book createTestBookA(final Author author) {
         return Book.builder()
                 .isbn("1235-56-6642-122")
                 .title("Il signore degli anelli")
-                .authorId(1L)
+                .author(author)
                 .build();
     }
 
-    public static Book createTestBookB() {
+    public static Book createTestBookB(final Author author) {
         return Book.builder()
                 .isbn("4631-56-6642-122")
                 .title("Il signore degli anelli - Le due torri")
-                .authorId(1L)
+                .author(author)
                 .build();
     }
 }

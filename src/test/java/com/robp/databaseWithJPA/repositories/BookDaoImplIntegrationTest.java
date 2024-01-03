@@ -1,5 +1,8 @@
-/*package com.robp.databaseWithJPA.repositories;
+package com.robp.databaseWithJPA.repositories;
 
+import com.robp.databaseWithJPA.TestDataUtil;
+import com.robp.databaseWithJPA.domain.Author;
+import com.robp.databaseWithJPA.domain.Book;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,28 +16,26 @@ import java.util.Optional;
 @ExtendWith(SpringExtension.class)
 public class BookDaoImplIntegrationTest {
 
-    private BookDaoImpl underTest;
+    private BookRepository underTest;
 
-    private AuthorDaoImpl authorDao;     //Evita Referential integrity constraint violation dovuti all'assenza delle chiave esterna
-
+    private AuthorRepository authorRepository;
 
     @Autowired
-    public BookDaoImplIntegrationTest(BookDaoImpl underTest, AuthorDaoImpl authorDao){
+    public BookDaoImplIntegrationTest(BookRepository underTest, AuthorRepository authorRepository){
         this.underTest = underTest;
-        this.authorDao = authorDao;
+        this.authorRepository = authorRepository;
     }
 
     @Test
-    public void testThatBookCanBeCreatedAndRecorded(){
+    public void testThatBookCanBeCreatedAndRecalled(){
 
         Author author = TestDataUtil.createTestAuthorA();
-        authorDao.create(author);
 
-        Book book = TestDataUtil.createTestBookA();
-        underTest.create(book);
-        Optional<Book> result = underTest.findOne(book.getIsbn());
+        Book book = TestDataUtil.createTestBookA(author);
+        underTest.save(book);
+        Optional<Book> result = underTest.findById(book.getIsbn());
         assertThat(result).isPresent();
         assertThat(result.get()).isEqualTo(book);
 
     }
-}*/
+}
